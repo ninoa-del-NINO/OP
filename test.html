@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>测试页面</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f7fb;
+}
+.container{
+  max-width:900px;
+  margin:60px auto;
+  background:#fff;
+  padding:40px;
+  border-radius:12px;
+  box-shadow:0 4px 16px rgba(0,0,0,.08);
+  text-align:center;
+}
+h1{color:#2563eb;}
+button{
+  padding:12px 24px;
+  border:none;
+  border-radius:8px;
+  background:#2563eb;
+  color:#fff;
+  cursor:pointer;
+  font-size:16px;
+}
+#msg{
+  margin-top:20px;
+  font-size:20px;
+  color:#16a34a;
+  display:none;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>GitHub Pages 测试页面</h1>
+<p>如果你能看到这个页面，说明 GitHub Pages 已经部署成功。</p>
+<button onclick="showMsg()">点击测试交互</button>
+<div id="msg">🎉 恭喜！JavaScript 交互正常工作！</div>
+</div>
+
+<script>
+function showMsg(){
+  document.getElementById('msg').style.display='block';
+}
+</script>
+</body>
+</html>
