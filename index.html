@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>26-27赛季 NBA&CBA</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f5f6fa;margin:0}
+.header{background:#1e3a8a;color:#fff;padding:28px;text-align:center}
+.container{width:900px;margin:24px auto}
+.card{background:#fff;border-radius:10px;padding:20px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.info{display:flex;gap:30px}
+.info div{flex:1}
+.metric{font-size:28px;font-weight:bold;color:#e11d48}
+button{background:#2563eb;color:#fff;border:none;border-radius:6px;padding:12px 28px;font-size:16px;cursor:pointer}
+button:disabled{background:#bbb}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ddd;padding:10px;text-align:center}
+th{background:#f1f5f9}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>26-27赛季 NBA & CBA</h1>
+<p>篮球激战正酣，最高日领2,888元</p>
+</div>
+<div class="container">
+<div class="card info">
+<div><p>今日累计负盈利</p><div class="metric" id="loss">0 元</div></div>
+<div><p>当前可领取</p><div class="metric" id="bonus">0 元</div></div>
+<div style="display:flex;align-items:center;justify-content:center">
+<button id="apply" disabled onclick="applyBonus()">立即申请</button>
+</div>
+</div>
+
+<div class="card">
+<h3>模拟数据</h3>
+<input id="inputLoss" type="number" value="0">
+<button onclick="calc()">计算奖励</button>
+</div>
+
+<div class="card">
+<table>
+<tr><th>累计负盈利</th><th>助力金</th></tr>
+<tr><td>≥500</td><td>8</td></tr>
+<tr><td>≥1000</td><td>18</td></tr>
+<tr><td>≥3000</td><td>58</td></tr>
+<tr><td>≥8000</td><td>168</td></tr>
+<tr><td>≥15000</td><td>288</td></tr>
+<tr><td>≥30000</td><td>888</td></tr>
+<tr><td>≥80000</td><td>2888</td></tr>
+</table>
+</div>
+</div>
+<script>
+function reward(v){
+if(v>=80000)return 2888;
+if(v>=30000)return 888;
+if(v>=15000)return 288;
+if(v>=8000)return 168;
+if(v>=3000)return 58;
+if(v>=1000)return 18;
+if(v>=500)return 8;
+return 0;
+}
+function calc(){
+const v=Number(document.getElementById('inputLoss').value)||0;
+const r=reward(v);
+document.getElementById('loss').innerText=v.toLocaleString()+" 元";
+document.getElementById('bonus').innerText=r.toLocaleString()+" 元";
+document.getElementById('apply').disabled=r===0;
+}
+function applyBonus(){alert("演示：申请成功（人工审核）");}
+calc();
+</script>
+</body>
+</html>
