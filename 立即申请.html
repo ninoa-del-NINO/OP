@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>立即申请-Web原型V2</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;font-family:"Microsoft YaHei",Arial}
+.header{background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e5e5}
+select{padding:6px 10px}
+.page{width:1200px;margin:24px auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.banner{height:260px;background:linear-gradient(135deg,#6c45ff,#8d69ff);display:flex;justify-content:center;align-items:center;color:#fff;font-size:42px;font-weight:bold}
+.content{padding:28px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.btn{background:#7a4dff;color:#fff;border:none;border-radius:24px;padding:12px 30px;font-size:15px;font-weight:bold;cursor:pointer;transition:.2s}
+.btn:hover:not(:disabled){background:#6940ef}
+.btn:disabled{background:#bfbfbf}
+table{width:100%;border-collapse:collapse;margin-top:20px}
+th,td{border:1px solid #ddd;padding:12px;text-align:center}
+th{background:#5d77d6;color:#fff}
+.mask{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);align-items:center;justify-content:center}
+.dialog{width:360px;background:#fff;border-radius:14px;padding:24px;text-align:center}
+.icon{font-size:56px}
+.ok{background:#7a4dff;color:#fff;border:0;padding:10px 28px;border-radius:22px;cursor:pointer;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="header">
+<div><b>ActivityApply Web Prototype V2</b></div>
+<div>
+演示场景：
+<select id="scene">
+<option value="success">活动开始（领取成功）</option>
+<option value="notstart">活动未开始</option>
+</select>
+</div>
+</div>
+
+<div class="page">
+<div class="banner">活动 Banner</div>
+<div class="content">
+<div class="top">
+<div>
+<h2>活动内容</h2>
+<p>满足条件即可申请，每位用户仅可申请一次。</p>
+</div>
+<button id="applyBtn" class="btn">立即申请</button>
+</div>
+
+<table>
+<tr><th>累计投注</th><th>奖励</th></tr>
+<tr><td>500</td><td>8</td></tr>
+<tr><td>1000</td><td>18</td></tr>
+<tr><td>3000</td><td>58</td></tr>
+<tr><td>8000</td><td>168</td></tr>
+</table>
+</div>
+</div>
+
+<div class="mask" id="mask">
+<div class="dialog">
+<div id="icon" class="icon">✔</div>
+<h2 id="title">领取成功</h2>
+<p id="msg">恭喜您申请成功。</p>
+<button class="ok" onclick="closeDlg()">知道了</button>
+</div>
+</div>
+
+<script>
+let applied=false;
+let pending=false;
+const btn=document.getElementById('applyBtn');
+
+btn.onclick=function(){
+ if(pending)return;
+
+ const scene=document.getElementById('scene').value;
+
+ if(applied){
+   show('ℹ','已申请成功','请勿重复申请。');
+   return;
+ }
+
+ pending=true;
+ btn.disabled=true;
+ btn.innerHTML='⏳ 申请中...';
+
+ setTimeout(()=>{
+    pending=false;
+
+    if(scene==='success'){
+        applied=true;
+        btn.innerHTML='✔ 已申请';
+        show('✔','领取成功','恭喜您，活动申请成功。');
+    }else{
+        btn.disabled=false;
+        btn.innerHTML='立即申请';
+        show('🕒','活动尚未开始','活动开始后即可申请。');
+    }
+ },800);
+}
+
+function show(i,t,m){
+ icon.innerHTML=i;
+ title.innerHTML=t;
+ msg.innerHTML=m;
+ mask.style.display='flex';
+}
+
+function closeDlg(){
+ mask.style.display='none';
+}
+</script>
+</body>
+</html>
