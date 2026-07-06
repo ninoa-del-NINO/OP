@@ -1,1 +1,465 @@
+/* =====================================================
+   派奖策略配置 Prototype V25
+   Author : ChatGPT
+   Style  : Axure Style
+===================================================== */
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    background:#FFFFFF;
+
+    font-family:
+        Arial,
+        "Microsoft YaHei",
+        sans-serif;
+
+    font-size:8px;
+
+    color:#333;
+
+    overflow-x:hidden;
+
+}
+
+.page{
+
+    width:860px;
+
+    margin:0 auto;
+
+    padding:8px;
+
+}
+
+
+/* ===========================
+      页面标题
+=========================== */
+
+.page-title{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+
+}
+
+
+/* ===========================
+      Card
+=========================== */
+
+.card{
+
+    border:1px solid #D9D9D9;
+
+    margin-bottom:10px;
+
+    background:#FFFFFF;
+
+}
+
+.card-title{
+
+    height:24px;
+
+    line-height:24px;
+
+    padding-left:10px;
+
+    background:#8CA1C1;
+
+    color:#FFFFFF;
+
+    font-weight:bold;
+
+}
+
+
+/* ===========================
+      Tabs
+=========================== */
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:8px;
+
+}
+
+.tabs{
+
+    display:flex;
+
+    gap:6px;
+
+}
+
+.tab{
+
+    min-width:60px;
+
+    height:24px;
+
+    border:1px solid #8CA1C1;
+
+    background:#FFFFFF;
+
+    color:#333333;
+
+    cursor:pointer;
+
+    border-radius:4px;
+
+}
+
+.tab.active{
+
+    background:#8CA1C1;
+
+    color:#FFFFFF;
+
+}
+
+.tab-action{
+
+    display:flex;
+
+    gap:6px;
+
+}
+
+
+/* ===========================
+      Button
+=========================== */
+
+button{
+
+    height:24px;
+
+    padding:0 12px;
+
+    border:1px solid #8CA1C1;
+
+    background:#FFFFFF;
+
+    cursor:pointer;
+
+    border-radius:4px;
+
+    font-size:8px;
+
+}
+
+button:hover{
+
+    opacity:.9;
+
+}
+
+#btnSave,
+#btnAddRule,
+#btnAddVenue,
+#btnAddStrategy{
+
+    background:#8CA1C1;
+
+    color:#FFFFFF;
+
+}
+
+
+/* ===========================
+      数据源
+=========================== */
+
+#venueContainer{
+
+    padding:8px;
+
+}
+
+.bottom-toolbar{
+
+    padding:8px;
+
+}
+
+
+/* ===========================
+      Deposit
+=========================== */
+
+.deposit-panel{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:10px;
+
+}
+
+.deposit-panel input[type="number"]{
+
+    width:80px;
+
+    height:22px;
+
+    padding-left:6px;
+
+}
+
+
+/* ===========================
+      Table
+=========================== */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#8CA1C1;
+
+}
+
+th{
+
+    color:#FFFFFF;
+
+    font-weight:normal;
+
+}
+
+th,
+td{
+
+    border:1px solid #D9D9D9;
+
+    height:28px;
+
+    padding:4px;
+
+    text-align:center;
+
+}
+
+
+/* ===========================
+      Input
+=========================== */
+
+input{
+
+    height:22px;
+
+    border:1px solid #CCCCCC;
+
+    padding-left:6px;
+
+    outline:none;
+
+}
+
+input:focus{
+
+    border-color:#8CA1C1;
+
+}
+
+
+/* ===========================
+      Tag
+=========================== */
+
+.tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:2px 6px;
+
+    margin-right:4px;
+
+    margin-bottom:4px;
+
+    border:1px solid #8CA1C1;
+
+    border-radius:3px;
+
+    background:#FFFFFF;
+
+}
+
+
+/* ===========================
+      删除
+=========================== */
+
+.delete{
+
+    color:#0000FF;
+
+    cursor:pointer;
+
+}
+
+
+/* ===========================
+      Rule Toolbar
+=========================== */
+
+.rule-toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:8px;
+
+}
+
+.rule-tip{
+
+    padding:4px 8px;
+
+    background:#FFF6BF;
+
+    border:1px solid #F0D878;
+
+}
+
+
+/* ===========================
+      Footer
+=========================== */
+
+.footer{
+
+    text-align:right;
+
+    margin-top:10px;
+
+}
+
+
+/* ===========================
+      Modal
+=========================== */
+
+.modal{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    right:0;
+
+    bottom:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.25);
+
+    z-index:999;
+
+}
+
+.modal-content{
+
+    width:420px;
+
+    background:#FFFFFF;
+
+    border-radius:4px;
+  overflow:hidden;
+
+}
+
+.modal-header{
+
+    height:36px;
+
+    line-height:36px;
+
+    padding-left:12px;
+
+    background:#8CA1C1;
+
+    color:#FFFFFF;
+
+}
+
+.modal-body{
+
+    padding:16px;
+
+}
+
+.modal-footer{
+
+    padding:12px;
+
+    text-align:right;
+
+}
+
+
+/* ===========================
+      Toast
+=========================== */
+
+.toast{
+
+    position:fixed;
+
+    right:20px;
+
+    bottom:20px;
+
+    background:#333333;
+
+    color:#FFFFFF;
+
+    padding:10px 18px;
+
+    border-radius:4px;
+
+    display:none;
+
+}
