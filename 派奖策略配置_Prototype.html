@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>派奖策略配置原型</title><style>
+body{margin:0;font-family:Microsoft YaHei,Arial;background:#f5f6fa}.header{background:#fff;padding:16px 24px;font-size:20px;font-weight:bold;border-bottom:1px solid #ddd}.wrap{width:1200px;margin:24px auto;background:#fff;border-radius:10px;padding:24px}.tabs{display:flex;gap:8px;align-items:center;margin-bottom:20px}.tab{padding:8px 18px;border:1px solid #7b57ff;border-radius:18px;cursor:pointer}.active{background:#7b57ff;color:#fff}.btn{padding:8px 14px;border:none;border-radius:6px;cursor:pointer}.primary{background:#7b57ff;color:#fff}.danger{background:#e74c3c;color:#fff}table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:12px}th{background:#fafafa}.tag{display:inline-block;background:#eef2ff;border:1px solid #ccd6ff;border-radius:14px;padding:3px 10px;margin:3px}.tag b{cursor:pointer;color:#888}.add{color:#7b57ff;cursor:pointer;font-weight:bold}
+</style></head><body><div class="header">派奖策略配置（HTML原型）</div><div class="wrap"><div class="tabs" id="tabs"></div><table><thead><tr><th width="220">体育场馆</th><th>联赛ID（最多10个）</th></tr></thead><tbody id="tb"></tbody></table><div style="margin-top:20px;text-align:right"><button class="btn primary">保存</button></div></div><script>
+const venues=["沙巴体育","PM体育","BTI体育"];
+let list=[{name:"策略1",data:{"沙巴体育":["1001","1002"],"PM体育":["2001"],"BTI体育":[]}}];
+let cur=0;
+function render(){
+let tabs=document.getElementById("tabs");tabs.innerHTML="";
+list.forEach((s,i)=>tabs.innerHTML+=`<div class="tab ${i==cur?"active":""}" onclick="cur=${i};render()">${s.name}</div>`);
+tabs.innerHTML+=`<button class="btn primary" onclick="addS()">+新增策略</button><button class="btn" onclick="editS()">编辑</button><button class="btn danger" onclick="delS()">删除</button>`;
+let tb=document.getElementById("tb");tb.innerHTML="";
+venues.forEach(v=>{
+let arr=list[cur].data[v]||[];
+let tags=arr.map((x,n)=>`<span class='tag'>${x} <b onclick="delTag('${v}',${n})">×</b></span>`).join("");
+tb.innerHTML+=`<tr><td>${v}</td><td>${tags}<span class="add" onclick="addTag('${v}')">+ 添加</span></td></tr>`;
+});
+}
+function addS(){let n=prompt("策略名称");if(!n)return;let d={};venues.forEach(v=>d[v]=[]);list.push({name:n,data:d});cur=list.length-1;render();}
+function editS(){let n=prompt("修改策略名称",list[cur].name);if(n){list[cur].name=n;render();}}
+function delS(){if(list.length==1){alert("至少保留一个策略");return;}if(confirm("删除当前策略？")){list.splice(cur,1);cur=0;render();}}
+function addTag(v){let id=prompt("请输入联赛ID");if(!id)return;if(!/^\d+$/.test(id)){alert("请输入数字");return;}let arr=list[cur].data[v];if(arr.includes(id)){alert("联赛ID已存在");return;}if(arr.length>=10){alert("最多10个");return;}arr.push(id);render();}
+function delTag(v,i){list[cur].data[v].splice(i,1);render();}
+render();
+</script></body></html>
