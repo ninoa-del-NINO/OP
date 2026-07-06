@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>派奖策略配置 V23</title>
+<style>
+body{margin:0;background:#fff;font:8px Arial,"Microsoft YaHei";}
+.wrap{width:860px;margin:0 auto;padding:6px;}
+.block{border:1px solid #D9D9D9;margin-bottom:8px;}
+.title{background:#8CA1C1;color:#fff;padding:4px 8px;font-weight:bold;}
+.content{padding:6px;}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ddd;padding:6px;font-size:8px}
+th{background:#8CA1C1;color:#fff}
+.btn{font-size:8px;border:1px solid #8CA1C1;background:#fff;padding:2px 8px;border-radius:3px;cursor:pointer}
+.primary{background:#8CA1C1;color:#fff}
+.del{color:#0000FF;cursor:pointer}
+.tag{display:inline-block;border:1px solid #ccd6ff;padding:1px 5px;margin-right:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="block">
+<div class="title">数据源配置</div>
+<div class="content">
+<table>
+<tr><th width="180">体育场馆</th><th>联赛ID（最多10个）</th></tr>
+<tr><td>沙巴体育</td><td><span class="tag">1001</span><span class="tag">1002</span><button class="btn primary">添加</button> <span class="del">删除</span></td></tr>
+<tr><td>PM体育</td><td><span class="tag">2001</span><button class="btn primary">添加</button> <span class="del">删除</span></td></tr>
+<tr><td>BTI体育</td><td><button class="btn primary">添加</button> <span class="del">删除</span></td></tr>
+</table>
+<div style="margin-top:4px"><button class="btn primary">+ 添加体育场馆</button></div>
+</div>
+</div>
+
+<div class="block">
+<div class="title">活动存款条件</div>
+<div class="content">
+<label><input type="radio" name="d"> 是</label>
+&nbsp;日累计存款 ≥ <input style="width:60px;font-size:8px">
+&nbsp;&nbsp;
+<label><input type="radio" name="d" checked> 否</label>
+</div>
+</div>
+
+<div class="block">
+<div class="title">规则配置</div>
+<div class="content">
+<table id="ruleTable">
+<tr><th>日有效投注</th><th>日负盈利</th><th>彩金（元）</th><th>流水倍数</th><th>操作</th></tr>
+<tr>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td align="center"><span class="del" onclick="this.closest('tr').remove()">删除</span></td>
+</tr>
+<tr>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td align="center"><span class="del" onclick="this.closest('tr').remove()">删除</span></td>
+</tr>
+</table>
+<div style="display:flex;justify-content:space-between;margin-top:4px">
+<div style="background:#FFF7A8;border:1px solid #D9C84A;padding:3px 6px">说明：以上未输入数值即视为不做条件限制</div>
+<button class="btn primary" onclick="addRule()">新增</button>
+</div>
+</div>
+</div>
+
+<div style="text-align:right"><button class="btn primary">保存</button></div>
+
+</div>
+<script>
+function addRule(){
+ const t=document.getElementById('ruleTable');
+ const r=t.insertRow(-1);
+ r.innerHTML=`<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td><input style="width:90%;font-size:8px"></td>
+<td align="center"><span class="del" onclick="this.closest('tr').remove()">删除</span></td>`;
+}
+</script>
+</body>
+</html>
