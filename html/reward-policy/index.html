@@ -1,1 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+
+<title>派奖策略配置</title>
+
+<link rel="stylesheet"
+href="reward-policy.css">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- ========================= -->
+    <!-- 页面标题 -->
+    <!-- ========================= -->
+
+    <div class="page-title">
+
+        派奖策略配置
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- 策略管理 -->
+    <!-- ========================= -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <div class="tabs">
+
+                <button class="tab active">
+
+                    策略1
+
+                </button>
+
+                <button class="tab">
+
+                    策略2
+
+                </button>
+
+                <button class="tab">
+
+                    策略3
+
+                </button>
+
+            </div>
+
+            <div class="tab-action">
+
+                <button id="btnAddStrategy">
+
+                    新增策略
+
+                </button>
+
+                <button id="btnEditStrategy">
+
+                    编辑
+
+                </button>
+
+                <button id="btnDeleteStrategy">
+
+                    删除
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- 数据源配置 -->
+    <!-- ========================= -->
+
+    <section class="card">
+
+        <div class="card-title">
+
+            数据源配置
+
+        </div>
+
+        <div id="venueContainer">
+
+        </div>
+
+        <div class="bottom-toolbar">
+
+            <button id="btnAddVenue">
+
+                添加体育场馆
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- 活动存款条件 -->
+    <!-- ========================= -->
+
+    <section class="card">
+
+        <div class="card-title">
+
+            活动存款条件
+
+        </div>
+
+        <div class="deposit-panel">
+
+            <label>
+
+                <input
+                    type="radio"
+                    name="deposit">
+
+                是
+
+            </label>
+
+            <span>
+
+                日累计存款 ≥
+
+            </span>
+
+            <input
+                id="depositAmount"
+                type="number">
+
+            <label>
+
+                <input
+                    type="radio"
+                    checked
+                    name="deposit">
+
+                否
+
+            </label>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- 规则配置 -->
+    <!-- ========================= -->
+
+    <section class="card">
+
+        <div class="card-title">
+
+            规则配置
+
+        </div>
+
+        <table
+            id="ruleTable">
+
+            <thead>
+
+            <tr>
+
+                <th>
+
+                    日有效投注
+
+                </th>
+
+                <th>
+
+                    日负盈利
+
+                </th>
+
+                <th>
+
+                    彩金
+
+                </th>
+
+                <th>
+
+                    流水倍数
+
+                </th>
+
+                <th>
+
+                    操作
+
+                </th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+
+        <div
+            class="rule-toolbar">
+
+            <div
+                class="rule-tip">
+
+                说明：以上未输入数值即视为不做条件限制
+
+            </div>
+
+            <button
+                id="btnAddRule">
+
+                新增规则
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- 保存 -->
+    <!-- ========================= -->
+
+    <div
+        class="footer">
+
+        <button
+            id="btnSave">
+
+            保存
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+
+<div
+    id="modalContainer">
+
+</div>
+
+<!-- Toast -->
+
+<div
+    id="toastContainer">
+
+</div>
+
+<script src="mock-data.js"></script>
+
+<script src="reward-policy.js"></script>
+
+</body>
+
+</html>
