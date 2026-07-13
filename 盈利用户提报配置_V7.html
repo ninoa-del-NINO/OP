@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang='zh-CN'><head><meta charset='utf-8'><title>盈利用户提报配置 V7</title>
+<style>
+body{font:12px Arial,"Microsoft YaHei"} .wrap{width:920px;margin:10px auto}
+table{width:100%;border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px;vertical-align:top}
+th{background:#8CA1C1;color:#fff}.btn{background:#8CA1C1;color:#fff;border:0;padding:4px 10px;border-radius:3px;cursor:pointer;margin-right:6px}
+.id{width:220px}.del{color:#00f;cursor:pointer;margin-left:8px}.msg{border:1px solid #ddd;background:#fafafa;padding:12px;white-space:pre-line}
+</style></head><body><div class='wrap'>
+<h3>盈利用户提报配置</h3>
+<table>
+<tr><th width='220'>配置项</th><th>配置值</th></tr>
+<tr><td>功能开关</td><td><button class='btn'>开启</button><button class='btn'>关闭</button></td></tr>
+<tr><td>提报群组</td><td>
+<b>TG群组ID（最多5个）</b>
+<div id='tg'><div>TG群组ID：<input class='id'><span class='del' onclick='this.parentNode.remove()'>删除</span></div></div>
+<p><button class='btn' onclick="add('tg','TG群组ID')">新增TG群组</button></p><hr>
+<b>Chat群组ID（最多5个）</b>
+<div id='chat'><div>Chat群组ID：<input class='id'><span class='del' onclick='this.parentNode.remove()'>删除</span></div></div>
+<p><button class='btn' onclick="add('chat','Chat群组ID')">新增Chat群组</button></p>
+</td></tr>
+<tr><td>统计时间（分钟）</td><td><input value='30' style='width:80px'> 默认30分钟</td></tr>
+<tr><td>盈利金额（元）</td><td><input value='5000' style='width:80px'> 大于等于该金额提报</td></tr>
+</table>
+<div style='text-align:right;margin-top:10px'><button class='btn'>保存</button></div>
+<h3>群内消息示意</h3>
+<div class='msg'>格式：
+
+2026-00-00  00:00-00:00
+
+【盈利用户提报】
+
+会员账号：
+
+所属团队：（首层）
+
+区间内盈利：（可配置盈利金额，不保留小数点位数，四舍五入）
+
+今日盈亏：（当日00:00:00至提报时间；用户今日总计盈亏）
+
+历史盈亏：（2023年1月1日至昨天23:59:59；用户盈亏金额）
+
+盈利场馆：（三方场馆盈利前三）
+
+盈利彩种：（彩票盈利前三彩种）
+
+
+示例：
+
+2026-07-13  11:00-11:30
+
+【盈利用户提报】
+
+会员账号：tstninoap10@h8
+
+所属团队：bonny1@h8
+
+区间内盈利：50,888
+
+今日盈利：20,688
+
+历史亏损：45,988
+
+盈利场馆：IM体育/沙巴体育
+
+盈利彩种：重庆时时彩/河内1分彩/河内5分彩</div>
+</div>
+<script>
+function add(id,label){
+ const c=document.getElementById(id);
+ if(c.children.length>=5){alert('最多只能添加5个');return;}
+ const d=document.createElement('div');
+ d.innerHTML=label+'：<input class="id"><span class="del" onclick="this.parentNode.remove()">删除</span>';
+ c.appendChild(d);
+}
+</script></body></html>
