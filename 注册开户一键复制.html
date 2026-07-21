@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注册开户交互原型 V3</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,"Microsoft YaHei",sans-serif;background:#eef3ef;color:#222}
+.page-mask{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.34);
+}
+.register-panel{
+  width:770px;
+  background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 6px 28px rgba(0,0,0,.28);
+}
+.register-header{
+  height:74px;
+  background:#e3f5e5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  font-size:29px;
+  font-weight:400;
+}
+.close-x{
+  position:absolute;
+  right:22px;
+  top:8px;
+  border:0;
+  background:transparent;
+  font-size:46px;
+  line-height:50px;
+  color:#3d3d3d;
+  cursor:pointer;
+}
+.register-body{padding:60px 60px 58px}
+.form-row{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  align-items:center;
+  margin-bottom:16px;
+}
+.form-label{
+  text-align:right;
+  padding-right:18px;
+  font-size:22px;
+  font-weight:700;
+}
+.form-control{
+  width:100%;
+  height:64px;
+  border:1px solid #cfcfcf;
+  border-radius:7px;
+  padding:0 14px;
+  font-size:20px;
+  color:#333;
+  background:#fff;
+  outline:none;
+}
+.form-control:focus{border-color:#73c98c;box-shadow:0 0 0 2px rgba(64,180,98,.12)}
+.help{
+  margin-left:160px;
+  padding-left:18px;
+  margin-top:-4px;
+  margin-bottom:18px;
+  color:#8b8b8b;
+  font-size:17px;
+}
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+  margin-top:58px;
+}
+.action-btn{
+  height:74px;
+  border-radius:7px;
+  font-size:27px;
+  font-weight:700;
+  cursor:pointer;
+}
+.reset-btn{background:#fff;border:1px solid #555;color:#111}
+.confirm-btn{border:0;color:#fff;background:linear-gradient(#19b95b,#02913c)}
+
+.success-mask{
+  display:none;
+  position:fixed;
+  inset:0;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.48);
+  z-index:20;
+}
+.success-box{
+  width:500px;
+  background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 8px 30px rgba(0,0,0,.35);
+}
+.success-head{
+  background:#e3f5e5;
+  padding:18px 24px;
+  text-align:center;
+  font-size:24px;
+  position:relative;
+}
+.success-close{
+  position:absolute;
+  right:15px;
+  top:6px;
+  border:0;
+  background:transparent;
+  font-size:34px;
+  cursor:pointer;
+}
+.success-content{padding:28px 34px 16px;font-size:18px;line-height:1.9}
+.success-row b{display:inline-block;width:125px}
+.notice{
+  margin-top:16px;
+  padding:10px 12px;
+  border:1px solid #cfe6d2;
+  background:#eff8f0;
+  color:#247a3b;
+  border-radius:5px;
+}
+.success-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  padding:16px 34px 26px;
+}
+.small-btn{
+  min-width:94px;
+  height:42px;
+  border-radius:5px;
+  font-size:16px;
+  cursor:pointer;
+}
+.cancel-btn{border:1px solid #aaa;background:#fff}
+.copy-btn{border:0;background:#079b45;color:#fff}
+.toast{
+  display:none;
+  position:fixed;
+  left:50%;
+  top:24px;
+  transform:translateX(-50%);
+  z-index:50;
+  background:#333;
+  color:#fff;
+  padding:10px 18px;
+  border-radius:5px;
+  font-size:15px;
+}
+@media(max-width:820px){
+  .register-panel{width:94vw}
+  .register-body{padding:35px 24px}
+  .form-row{grid-template-columns:120px 1fr}
+  .help{margin-left:120px}
+}
+</style>
+</head>
+<body>
+
+<div class="page-mask" id="registerPage">
+  <div class="register-panel">
+    <div class="register-header">
+      注册开户
+      <button class="close-x" type="button" onclick="closeRegister()">×</button>
+    </div>
+
+    <div class="register-body">
+      <div class="form-row">
+        <div class="form-label">类型：</div>
+        <select id="accountType" class="form-control">
+          <option>会员</option>
+          <option>代理</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-label">用户名：</div>
+        <input id="username" class="form-control" value="tstninoap08">
+      </div>
+      <div class="help">用户名可以使用</div>
+
+      <div class="form-row">
+        <div class="form-label">密码：</div>
+        <input id="password" class="form-control" type="password" value="123456">
+      </div>
+      <div class="help">密码可以使用</div>
+
+      <div class="form-row">
+        <div class="form-label">彩票返点：</div>
+        <select id="rebate" class="form-control">
+          <option>0.0%</option>
+          <option>0.1%</option>
+          <option>0.2%</option>
+        </select>
+      </div>
+      <div class="help">自身保留返点：4%</div>
+
+      <div class="actions">
+        <button class="action-btn reset-btn" type="button" onclick="resetForm()">重置</button>
+        <button class="action-btn confirm-btn" type="button" onclick="submitRegister()">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="success-mask" id="successMask">
+  <div class="success-box">
+    <div class="success-head">
+      开户成功
+      <button class="success-close" type="button" onclick="closeSuccess()">×</button>
+    </div>
+    <div class="success-content">
+      <div class="success-row"><b>会员账号：</b><span id="successUser"></span></div>
+      <div class="success-row"><b>登录密码：</b><span id="successPwd"></span></div>
+      <div class="success-row"><b>彩票返点：</b><span id="successRebate"></span></div>
+      <div class="notice" id="successNotice"></div>
+    </div>
+    <div class="success-actions">
+      <button class="small-btn cancel-btn" type="button" onclick="closeSuccess()">取消</button>
+      <button class="small-btn copy-btn" id="copyBtn" type="button" onclick="copyAccount()">一键复制</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function closeRegister(){
+  document.getElementById('registerPage').style.display='none';
+}
+function resetForm(){
+  document.getElementById('accountType').value='会员';
+  document.getElementById('username').value='';
+  document.getElementById('password').value='';
+  document.getElementById('rebate').value='0.0%';
+}
+function submitRegister(){
+  const username=document.getElementById('username').value.trim();
+  const password=document.getElementById('password').value.trim();
+  const rebate=document.getElementById('rebate').value;
+
+  if(!username){
+    showToast('请输入用户名');
+    return;
+  }
+  if(!password){
+    showToast('请输入密码');
+    return;
+  }
+
+  document.getElementById('successUser').textContent=username;
+  document.getElementById('successPwd').textContent=password;
+  document.getElementById('successRebate').textContent=rebate;
+  document.getElementById('successNotice').textContent='已自动将下级返点设置为'+rebate;
+  document.getElementById('successMask').style.display='flex';
+}
+function closeSuccess(){
+  document.getElementById('successMask').style.display='none';
+}
+async function copyAccount(){
+  const username=document.getElementById('successUser').textContent;
+  const password=document.getElementById('successPwd').textContent;
+  const rebate=document.getElementById('successRebate').textContent;
+  const text='会员账号：'+username+'\n登录密码：'+password+'\n彩票返点：'+rebate;
+
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(e){
+    const textarea=document.createElement('textarea');
+    textarea.value=text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  }
+
+  const btn=document.getElementById('copyBtn');
+  btn.textContent='已复制';
+  showToast('复制成功');
+  setTimeout(()=>btn.textContent='一键复制',1500);
+}
+function showToast(message){
+  const toast=document.getElementById('toast');
+  toast.textContent=message;
+  toast.style.display='block';
+  clearTimeout(window.toastTimer);
+  window.toastTimer=setTimeout(()=>toast.style.display='none',1800);
+}
+</script>
+</body>
+</html>
